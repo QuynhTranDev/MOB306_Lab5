@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, SafeAreaView, View } from 'react-native';
+import MyWebView from './MyWebView';
+import { useEffect, useState } from 'react';
 
 export default function App() {
+
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log('Start UseEffect')
+      setLoading(false)
+    }, 6000)
+  }, [])
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        
+        <MyWebView />
+
+        <ActivityIndicator animating = {isLoading}/>
+      </View>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
